@@ -5,7 +5,9 @@ namespace App\Http\Dtos;
 class PaymentDto
 {
     public int $orderId;
+
     public string $customerEmail;
+
     public float $value;
 
     public function __construct(int $order_id, string $customer_email, float $value)

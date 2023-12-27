@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
@@ -15,7 +14,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class ProductResource extends JsonResource
 {
     /**
-     * @param $request
      * @return array{id: int, product_name: string, price: string, created_at: string, updated_at: string}
      */
     public function toArray($request): array

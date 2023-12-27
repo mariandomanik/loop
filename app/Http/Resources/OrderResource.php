@@ -8,7 +8,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 /**
  * @property int $id
  * @property int $customer_id
- * @property boolean $is_paid
+ * @property bool $is_paid
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property mixed $products
@@ -16,7 +16,6 @@ use Illuminate\Http\Resources\Json\JsonResource;
 class OrderResource extends JsonResource
 {
     /**
-     * @param $request
      * @return array{created_at: string, customer_id: int, id: int, is_paid: bool, updated_at: string}
      */
     public function toArray($request): array

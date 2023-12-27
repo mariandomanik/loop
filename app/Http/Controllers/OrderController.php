@@ -57,11 +57,15 @@ class OrderController extends Controller
         $product = $request->validated();
         $order->products()->attach($product['product_id']);
 
-        return OrderResource::make($order);
+        return new OrderResource($order);
     }
 
-    public function pay()
+    public function pay(Order $order): JsonResponse
     {
-        return $this->orderService->pay();
+        $result = $this->orderService->pay($order, $this->orderService::PAYMENT_PROVIDER_SUPER_PAYMENT);
+
+        $updatedOrder = new OrderResource($result['order']);
+
+        return response()->json(['order' => $updatedOrder, 'message' => $result['message']]);
     }
 }
