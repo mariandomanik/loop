@@ -1,0 +1,11 @@
+estimate:
+-Import Masterdata: 2h
+-Expose Order Data as REST Service: 2h
+-Create Add-Product-to-Order Endpoint: 2h
+-Create Pay-Order Endpoint: 3h
+
+measured:
+-Import Masterdata: 3h
+-Expose Order Data as REST Service: 1h
+-Create Add-Product-to-Order Endpoint: 1:20h
+-Create Pay-Order Endpoint: 4:30h
