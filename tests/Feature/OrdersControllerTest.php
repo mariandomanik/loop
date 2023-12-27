@@ -242,6 +242,9 @@ class OrdersControllerTest extends TestCase
             ]);
     }
 
+    /**
+     * @throws \JsonException
+     */
     public function test_pay_fail(): void
     {
         $body = json_encode([

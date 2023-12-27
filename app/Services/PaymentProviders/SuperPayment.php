@@ -33,6 +33,12 @@ class SuperPayment implements PaymentInterface
      */
     public function pay(): array
     {
+        Log::info('Sending payment request', [
+            'order_id' => $this->order->id,
+            'customer_email' => $this->order->customer->email,
+            'value' => $this->order->paymentTotal,
+        ]);
+
         $paymentDto = new PaymentDto(
             $this->order->id,
             $this->order->customer->email,
@@ -52,6 +58,7 @@ class SuperPayment implements PaymentInterface
 
         } catch (\Throwable $th) {
             Log::error('Error while processing payment', [
+                'order_id' => $this->order->id,
                 'message' => $th->getMessage(),
             ]);
             $this->order->is_paid = false;
@@ -72,6 +79,7 @@ class SuperPayment implements PaymentInterface
     {
         if (! isset($body['message'])) {
             Log::error('Error while processing payment', [
+                'order_id' => $this->order->id,
                 'response' => $body,
             ]);
 
@@ -98,10 +106,17 @@ class SuperPayment implements PaymentInterface
                 ]);
 
             if ($response->status() === 200) {
+                Log::info('Payment request successful', [
+                    'order_id' => $this->order->id,
+                    'status' => $response->status(),
+                    'body' => $response->body(),
+                ]);
+
                 return $response;
             }
 
             Log::error('Error while sending request to SuperPayment', [
+                'order_id' => $this->order->id,
                 'status' => $response->status(),
                 'body' => $response->body(),
             ]);
