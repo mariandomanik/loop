@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
@@ -26,22 +27,30 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  *
  * @mixin \Eloquent
  */
-class Product extends Model
+class Order extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'product_name',
-        'price',
+        'customer_id',
+        'is_paid',
     ];
 
     public $timestamps = true;
 
     /**
-     * @return BelongsToMany<Order>
+     * @return BelongsTo<Customer>
      */
-    public function orders(): BelongsToMany
+    public function customer(): BelongsTo
     {
-        return $this->belongsToMany(Order::class);
+        return $this->belongsTo(Customer::class);
+    }
+
+    /**
+     * @return BelongsToMany<Product>
+     */
+    public function products(): BelongsToMany
+    {
+        return $this->belongsToMany(Product::class);
     }
 }
