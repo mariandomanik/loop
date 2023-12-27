@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('orders/{order}/add', [OrderController::class, 'addProduct']);
-Route::post('orders/{order}/pay', [OrderController::class, 'pay']);
+Route::post('orders/{order}/add', [OrderController::class, 'addProduct'])->name('orders.add-product');
+Route::post('orders/{order}/pay', [OrderController::class, 'pay'])->name('orders.pay');
 Route::resource('orders', OrderController::class);

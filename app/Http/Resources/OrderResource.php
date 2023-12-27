@@ -12,6 +12,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  * @property mixed $products
+ * @property mixed $paymentTotal
  */
 class OrderResource extends JsonResource
 {
@@ -27,6 +28,7 @@ class OrderResource extends JsonResource
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'products' => ProductResource::collection($this->products),
+            'payment_total' => $this->paymentTotal,
         ];
     }
 }

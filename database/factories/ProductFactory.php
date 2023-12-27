@@ -2,13 +2,12 @@
 
 namespace Database\Factories;
 
-use App\Models\Customer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Order>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
  */
-class OrderFactory extends Factory
+class ProductFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,8 +17,8 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'customer_id' => Customer::factory(),
-            'is_paid' => fake()->boolean,
+            'product_name' => fake()->word.' '.fake()->word,
+            'price' => fake()->randomFloat(2, 1, 100),
         ];
     }
 }

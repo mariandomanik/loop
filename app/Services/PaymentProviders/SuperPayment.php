@@ -41,12 +41,13 @@ class SuperPayment implements PaymentInterface
 
         try {
             $response = $this->sendRequest($paymentDto);
-            $this->order->is_paid = $this->processResponse($response->body());
+            $body = json_decode($response->body(), true, 512, JSON_THROW_ON_ERROR);
+            $this->order->is_paid = $this->processResponse($body);
             $this->order->save();
 
             return [
                 'order' => $this->order,
-                'message' => $response->body(),
+                'message' => $body['message'],
             ];
 
         } catch (\Throwable $th) {
@@ -65,10 +66,17 @@ class SuperPayment implements PaymentInterface
 
     /**
      * @throws \JsonException
+     * @throws \Exception
      */
-    public function processResponse(string $body): bool
+    public function processResponse(array $body): bool
     {
-        $body = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
+        if (! isset($body['message'])) {
+            Log::error('Error while processing payment', [
+                'response' => $body,
+            ]);
+
+            throw new \Exception('Response body does not contain message');
+        }
 
         return $body['message'] === self::MSG_RESPONSE_OK;
     }

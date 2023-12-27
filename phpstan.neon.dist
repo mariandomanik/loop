@@ -22,3 +22,7 @@ parameters:
 #    checkMissingIterableValueType: false
 
     checkGenericClassInNonGenericObjectType: false
+    ignoreErrors:
+            -
+                message: '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$customer_id#'
+                path: tests/Feature/OrdersControllerTest.php

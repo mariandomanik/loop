@@ -11,5 +11,8 @@ interface PaymentInterface
      */
     public function pay(): array;
 
-    public function processResponse(string $body): bool;
+    /**
+     * @param  array<string, mixed>  $body
+     */
+    public function processResponse(array $body): bool;
 }

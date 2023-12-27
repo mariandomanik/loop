@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * App\Models\Product
  *
  * @property int $id
+ * @property int $customer_id
  * @property string $product_name
  * @property string $price
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -26,7 +27,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereProductName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereUpdatedAt($value)
  *
- * @property int $customer_id
  * @property bool $is_paid
  * @property-read \App\Models\Customer $customer
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Product> $products
