@@ -103,7 +103,7 @@ class ImportCustomers extends Command
     {
         try {
             //Remove the day of the week from the date, e.g. "Monday, January 1, 2021" => "January 1, 2021"
-            $parsedDate = preg_replace('/^.*?,/', '', $date);
+            $parsedDate = preg_replace('/^[^,]*,/', '', $date);
 
             return Carbon::createFromFormat('F j,Y', $parsedDate)->startOfDay()->toIso8601String();
         } catch (\Throwable $th) {

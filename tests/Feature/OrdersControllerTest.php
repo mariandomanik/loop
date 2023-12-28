@@ -323,4 +323,22 @@ class OrdersControllerTest extends TestCase
                 'message' => 'Order is already paid',
             ]);
     }
+
+    public function test_attach_invalid_product(): void
+    {
+        $order = Order::factory()->create();
+
+        $this->postJson(route('orders.add-product', ['order' => $order->id]), [
+            'product_id' => 999,
+        ])
+            ->assertStatus(422)
+            ->assertJson([
+                'message' => 'The selected product id is invalid.',
+                'errors' => [
+                    'product_id' => [
+                        'The selected product id is invalid.',
+                    ],
+                ],
+            ]);
+    }
 }
